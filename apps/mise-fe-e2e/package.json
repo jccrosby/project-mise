@@ -1,0 +1,10 @@
+{
+  "name": "@crosbyhq/mise-fe-e2e",
+  "version": "0.0.1",
+  "private": true,
+  "nx": {
+    "implicitDependencies": [
+      "@crosbyhq/mise-fe"
+    ]
+  }
+}
