@@ -1,0 +1,37 @@
+{
+  "name": "@crosbyhq/mise-be",
+  "version": "0.0.1",
+  "private": true,
+  "nx": {
+    "targets": {
+      "serve": {
+        "continuous": true,
+        "executor": "@nx/js:node",
+        "defaultConfiguration": "development",
+        "dependsOn": [
+          "build"
+        ],
+        "options": {
+          "buildTarget": "@crosbyhq/mise-be:build",
+          "runBuildTargetDependencies": false
+        },
+        "configurations": {
+          "development": {
+            "buildTarget": "@crosbyhq/mise-be:build:development"
+          },
+          "production": {
+            "buildTarget": "@crosbyhq/mise-be:build:production"
+          }
+        }
+      },
+      "test": {
+        "options": {
+          "passWithNoTests": true
+        }
+      }
+    },
+    "tags": [
+      "backend"
+    ]
+  }
+}

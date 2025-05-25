@@ -1,4 +1,7 @@
 onlyBuiltDependencies:
   - '@swc/core'
-  - esbuild
-  - nx
+  - 'esbuild'
+  - 'nx'
+packages:
+  - 'frontend/*'
+  - 'backend/*'

@@ -8,6 +8,12 @@
     },
     {
       "path": "./apps/mise-fe"
+    },
+    {
+      "path": "./backend/mise-be-e2e"
+    },
+    {
+      "path": "./backend/mise-be"
     }
   ]
 }
