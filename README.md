@@ -1,101 +1,115 @@
-# Crosbyhq
+# Project MISE by CrosbyHQ
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+[![License: GNU-GPLv3](https://img.shields.io/badge/License-GPLv3-blue.svg)](./LICENSE.txt)
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is ready ✨.
+## Overview
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/getting-started/tutorials/react-monorepo-tutorial?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+Project MISE is a modern chat application that enables AI-powered conversations with context awareness. Built with a TypeScript-based full-stack architecture using React for the frontend and Express for the backend, it provides a flexible and interactive way to engage with AI models.
 
-## Run tasks
+## Features
 
-To run the dev server for your app, use:
+- 🌐 Real-time chat with WebSockets
+- 🧠 Context-aware AI conversations
+- 🔄 Streaming responses for a better user experience
+- 📊 Context switching for different topics (coding, cooking, etc.)
 
-```sh
-npx nx serve mise-fe
+## Tech Stack
+
+### Frontend
+
+- React 19
+- React Router 7
+- Tailwind CSS
+- Vite
+- TypeScript
+
+### Backend
+
+- Express
+- WebSockets (ws)
+- SQLite (better-sqlite3)
+- TypeScript
+- Node.js
+
+### Development Tools
+
+- Nx (Monorepo management)
+- Jest (Unit testing)
+- Playwright (E2E testing)
+- ESLint & Prettier (Code quality)
+- TypeScript
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v20 or higher recommended)
+- pnpm
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/jccrosby/project-mise.git
+cd project-mise
+
+# Install dependencies
+pnpm install
 ```
 
-To create a production bundle:
+### Development
 
-```sh
-npx nx build mise-fe
+```bash
+# Start the backend development server
+nx serve mise-be
+
+# Start the frontend development server
+nx dev mise-fe
 ```
 
-To see all available targets to run for a project, run:
+### Build
 
-```sh
-npx nx show project mise-fe
+```bash
+# Build the entire project
+nx run-many -t build
+
+# Build specific projects
+nx build mise-be
+nx build mise-fe
 ```
 
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
+### Testing
 
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+```bash
+# Run tests for all projects
+nx run-many -t test
 
-## Add new projects
-
-While you could add new projects to your workspace manually, you might want to leverage [Nx plugins](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) and their [code generation](https://nx.dev/features/generate-code?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) feature.
-
-Use the plugin's generator to create new projects.
-
-To generate a new application, use:
-
-```sh
-npx nx g @nx/react:app demo
+# Run E2E tests
+nx e2e mise-fe-e2e
 ```
 
-To generate a new library, use:
+## Project Structure
 
-```sh
-npx nx g @nx/react:lib mylib
+```
+.
+├── backend/                  # Backend services
+│   ├── mise-be/              # Main backend service
+│   │   └── src/              # Source files
+│   │       ├── services/     # Service implementations
+│   │       └── types/        # TypeScript type definitions
+│   └── mise-be-e2e/          # End-to-end tests for backend
+├── frontend/                 # Frontend applications
+│   ├── mise-fe/              # Main frontend application
+│   │   ├── app/              # Application code
+│   │   │   ├── components/   # Reusable React components
+│   │   │   ├── hooks/        # Custom React hooks
+│   │   │   └── routes/       # Application routes
+│   │   └── public/           # Static assets
+│   └── mise-fe-e2e/          # End-to-end tests for frontend
+├── nx.json                   # Nx configuration
+└── package.json              # Project dependencies
 ```
 
-You can use `npx nx list` to get a list of installed plugins. Then, run `npx nx list <plugin-name>` to learn about more specific capabilities of a particular plugin. Alternatively, [install Nx Console](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) to browse plugins and generators in your IDE.
+## License
 
-[Learn more about Nx plugins &raquo;](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) | [Browse the plugin registry &raquo;](https://nx.dev/plugin-registry?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Set up CI!
-
-### Step 1
-
-To connect to Nx Cloud, run the following command:
-
-```sh
-npx nx connect
-```
-
-Connecting to Nx Cloud ensures a [fast and scalable CI](https://nx.dev/ci/intro/why-nx-cloud?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) pipeline. It includes features such as:
-
-- [Remote caching](https://nx.dev/ci/features/remote-cache?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Task distribution across multiple machines](https://nx.dev/ci/features/distribute-task-execution?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Automated e2e test splitting](https://nx.dev/ci/features/split-e2e-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Task flakiness detection and rerunning](https://nx.dev/ci/features/flaky-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-### Step 2
-
-Use the following command to configure a CI workflow for your workspace:
-
-```sh
-npx nx g ci-workflow
-```
-
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Install Nx Console
-
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
-
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Useful links
-
-Learn more:
-
-- [Learn more about this workspace setup](https://nx.dev/getting-started/tutorials/react-monorepo-tutorial?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-And join the Nx community:
-- [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+This project is licensed under the GNU GPLv3 License - see the [LICENSE file](./LICENSE.txt) for details.

@@ -1,7 +1,10 @@
-onlyBuiltDependencies:
-  - '@swc/core'
-  - 'esbuild'
-  - 'nx'
 packages:
-  - 'frontend/*'
-  - 'backend/*'
+  - frontend/*
+  - backend/*
+onlyBuiltDependencies:
+  - '@parcel/watcher'
+  - '@swc/core'
+  - better-sqlite3
+  - core-js-pure
+  - esbuild
+  - nx

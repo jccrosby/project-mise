@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router';
 
-export function AppNav() {
-  return (
+export function Navigation() {
+  return null; /* (
     <nav>
       <NavLink to="/" end>
         Home
@@ -10,5 +10,5 @@ export function AppNav() {
         About
       </NavLink>
     </nav>
-  );
+  ); */
 }

@@ -7,12 +7,13 @@ import {
   type MetaFunction,
   type LinksFunction,
 } from 'react-router';
+import '../styles.css';
 
-import { AppNav } from './app-nav';
+import { Navigation } from './components/Navigation';
 
 export const meta: MetaFunction = () => [
   {
-    title: 'New Nx React Router App',
+    title: 'Project Mise',
   },
 ];
 
@@ -34,13 +35,16 @@ export function Layout({ children }: { children: React.ReactNode }) {
     <html lang="en">
       <head>
         <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <Meta />
         <Links />
       </head>
-      <body>
-        <AppNav />
-        {children}
+      <body className="h-full">
+        <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+          <Navigation />
+          {children}
+        </div>
         <ScrollRestoration />
         <Scripts />
       </body>

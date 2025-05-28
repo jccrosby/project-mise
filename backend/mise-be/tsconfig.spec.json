@@ -4,7 +4,14 @@
     "outDir": "./out-tsc/jest",
     "types": ["jest", "node"],
     "module": "nodenext",
-    "moduleResolution": "nodenext"
+    "moduleResolution": "nodenext",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "declaration": true,
+    "sourceMap": true
   },
   "include": [
     "jest.config.ts",

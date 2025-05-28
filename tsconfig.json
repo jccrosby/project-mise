@@ -4,16 +4,16 @@
   "files": [],
   "references": [
     {
-      "path": "./apps/mise-fe-e2e"
-    },
-    {
-      "path": "./apps/mise-fe"
-    },
-    {
       "path": "./backend/mise-be-e2e"
     },
     {
       "path": "./backend/mise-be"
+    },
+    {
+      "path": "./frontend/mise-fe-e2e"
+    },
+    {
+      "path": "./frontend/mise-fe"
     }
   ]
 }
