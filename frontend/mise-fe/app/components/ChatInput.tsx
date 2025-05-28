@@ -56,6 +56,7 @@ export function ChatInput({
       />
       <Button
         type="submit"
+        name="send"
         disabled={!message.trim() || disabled}
         className="self-end"
       >
