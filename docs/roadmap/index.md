@@ -6,6 +6,7 @@ author: 'Crosby'
 tags: ['AI', 'Roadmap', 'Personal']
 updates:
   - 2025-05-30: Initial draft (Crosby)
+  - 2025-05-30: Completed Node.js API wrapper (Crosby)
 ---
 
 # Personal AI Project Roadmap
@@ -22,7 +23,7 @@ updates:
 ### Personal Infrastructure
 
 1. [x] Set up Ollama with Llama 3.2 and Mistral on your custom PC for baseline LLM capabilities
-2. [ ] Create a simple Node.js API wrapper for consistent access across your devices
+2. [x] Create a simple Node.js API wrapper for consistent access across your devices
 3. [ ] Install Home Assistant on your older Windows laptop as a dedicated automation server
 4. [ ] Set up a basic PostgreSQL + pgvector instance for future RAG implementations
 
