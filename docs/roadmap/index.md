@@ -13,10 +13,10 @@ updates:
 
 ## Technical Principles
 
-1. [ ] Always have offline fallbacks
-2. [ ] Prefer open models you can modify
-3. [ ] Start with inference, move to fine-tuning only when needed
-4. [ ] Use existing hardware before buying new
+1. Always have offline fallbacks
+2. Prefer open models you can modify
+3. Start with inference, move to fine-tuning only when needed
+4. Use existing hardware before buying new
 
 ## Phase 1: Foundation & Quick Wins
 
