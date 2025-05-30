@@ -1,0 +1,152 @@
+# Project Mise - Cursor Rules
+
+## Project Overview
+
+You are working on **Project Mise**, a full-stack TypeScript application built with Nx monorepo architecture.
+
+### Architecture
+
+- **Monorepo**: Nx workspace with pnpm package manager
+- **Frontend**: React Router v7 with Vite, Tailwind CSS, Vitest testing
+- **Backend**: Node.js with Webpack, Express-style routing, Jest testing
+- **E2E Testing**: Playwright for both frontend and backend
+- **AI Integration**: Custom AI services in backend
+- **Database**: SQLite (ai_contexts.db)
+
+### Project Structure
+
+```
+@crosbyhq/
+├── frontend/mise-fe/           # React Router app
+├── backend/mise-be/            # Node.js API server
+├── frontend/mise-fe-e2e/       # Frontend E2E tests
+└── backend/mise-be-e2e/        # Backend E2E tests
+```
+
+## Development Guidelines
+
+### Code Style & Standards
+
+- **TypeScript**: Strict mode enabled, always use types
+- **ESLint**: Follow configured rules, fix linting errors before committing
+- **Prettier**: Auto-format on save
+- **Imports**: Use absolute imports with workspace paths (@crosbyhq/\*)
+- **Components**: Create reusable UI components in frontend/mise-fe/app/components/ui/
+- **Naming**: Use kebab-case for files, PascalCase for components, camelCase for functions
+
+### Nx-Specific Rules
+
+- **Never run npm/pnpm directly** - always use Nx commands
+- **Development**: Use `nx dev mise-fe` and `nx serve mise-be` for local development
+- **Testing**: Run `nx test` for unit tests, `nx e2e` for end-to-end tests
+- **Building**: Use `nx build` for production builds
+- **Dependencies**: Understand project dependencies - frontend doesn't depend on backend in build graph
+- **Affected**: Use `nx affected` commands to run only what changed
+
+### Frontend Development (React Router)
+
+- **Routing**: Use React Router v7 file-based routing in app/routes/
+- **State Management**: Use React hooks and context
+- **Styling**: Tailwind CSS for styling, create utility classes
+- **Components**: Build accessible, responsive components
+- **Testing**: Use Vitest for unit tests, test user interactions
+- **Performance**: Lazy load routes and components where appropriate
+
+### Backend Development (Node.js)
+
+- **Structure**: Organize by feature in src/ (routes/, services/, types/)
+- **API Design**: RESTful endpoints with proper HTTP status codes
+- **Error Handling**: Implement comprehensive error handling middleware
+- **AI Services**: Leverage existing AI service architecture in services/ai/
+- **Database**: Use SQLite efficiently, consider query optimization
+- **Security**: Implement proper authentication and input validation
+
+### Testing Strategy
+
+- **Unit Tests**: Test business logic and pure functions
+- **Integration Tests**: Test API endpoints and database interactions
+- **E2E Tests**: Test complete user workflows with Playwright
+- **Coverage**: Aim for meaningful test coverage, not just numbers
+- **Mocking**: Mock external dependencies appropriately
+
+### Performance & Optimization
+
+- **Bundle Size**: Monitor frontend bundle size with Vite
+- **API Performance**: Profile backend endpoints and database queries
+- **Caching**: Implement appropriate caching strategies
+- **Lazy Loading**: Use dynamic imports for large dependencies
+
+### AI/ML Integration
+
+- **Context Management**: Efficiently manage AI context data
+- **Error Handling**: Handle AI service failures gracefully
+- **Streaming**: Support streaming responses where appropriate
+- **Rate Limiting**: Implement proper rate limiting for AI endpoints
+
+### Development Workflow
+
+1. **Feature Development**: Create feature branches, develop in isolation
+2. **Testing**: Write tests before or alongside code
+3. **Linting**: Fix ESLint and TypeScript errors continuously
+4. **Building**: Ensure builds pass before committing
+5. **E2E Testing**: Run relevant E2E tests for critical paths
+
+### Common Commands
+
+```bash
+# Development
+nx dev mise-fe              # Start frontend dev server
+nx serve mise-be            # Start backend server
+
+# Testing
+nx test mise-fe             # Frontend unit tests
+nx test mise-be             # Backend unit tests
+nx e2e mise-fe-e2e         # Frontend E2E tests
+nx e2e mise-be-e2e         # Backend E2E tests
+
+# Building
+nx build mise-fe            # Build frontend
+nx build mise-be            # Build backend
+
+# Linting & Type Checking
+nx lint mise-fe             # Lint frontend
+nx typecheck mise-fe        # Type check frontend
+nx affected:lint            # Lint affected projects
+```
+
+### File Organization
+
+- **Shared Types**: Define in appropriate project's types/ directory
+- **Utilities**: Create shared utilities in appropriate locations
+- **Assets**: Store static assets in respective public/ or assets/ directories
+- **Configuration**: Keep config files at project roots
+
+### Database & Persistence
+
+- **Migrations**: Handle schema changes carefully
+- **Queries**: Optimize database queries, consider indexing
+- **Backup**: Ensure proper backup strategies for production
+
+### Security Considerations
+
+- **Input Validation**: Validate all user inputs
+- **Authentication**: Implement secure authentication flows
+- **API Security**: Use proper CORS, rate limiting, and security headers
+- **Environment Variables**: Never commit secrets, use proper env management
+
+### Debugging & Monitoring
+
+- **Logging**: Implement structured logging throughout the application
+- **Error Tracking**: Set up proper error tracking and monitoring
+- **Performance Monitoring**: Monitor application performance metrics
+
+## Key Technologies
+
+- **Frontend**: React 19+, React Router v7, TypeScript, Tailwind CSS, Vite
+- **Backend**: Node.js, TypeScript, Webpack, Express patterns
+- **Testing**: Vitest, Jest, Playwright
+- **Build System**: Nx, pnpm
+- **AI/ML**: Custom AI service integration
+- **Database**: SQLite
+
+Remember: This is an Nx workspace - leverage its powerful dependency graph, affected builds, and caching for efficient development!
