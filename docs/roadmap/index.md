@@ -29,9 +29,9 @@ updates:
 
 ### First Automation
 
-1. [ ] **Daily Standup Assistant**: Parse your git commits, calendar, and Slack/Teams to generate a morning summary
-2. [ ] **Code Review Buddy**: Local pre-commit hook using CodeLlama for basic TypeScript/JavaScript checks
-3. [ ] **Meeting Transcriber**: Use Whisper to transcribe and summarize calls locally (no sensitive MLB data in the cloud)
+1. [ ] **Code Review Buddy**: Local pre-commit hook using CodeLlama for basic TypeScript/JavaScript checks
+2. [ ] **Meeting Transcriber**: Use Whisper to transcribe and summarize calls locally (no sensitive MLB data in the cloud)
+3. [ ] **Daily Standup Assistant**: Parse your git commits, calendar, and Slack/Teams to generate a morning summary
 
 ### Edge Experiment
 
