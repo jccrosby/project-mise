@@ -3,6 +3,7 @@ import { DatabaseService } from './DatabaseService';
 import { OllamaService } from './OllamaService';
 import {
   ConversationMessage,
+  ConversationContext,
   ActiveContext,
   ModelType,
   ChatRequest,
@@ -52,6 +53,92 @@ export class AIRouterService {
     }
 
     this.activeContexts.set(contextId, context);
+    return context;
+  }
+
+  // New REST API methods
+  async listAvailableModels(): Promise<string[]> {
+    return this.ollamaService.listModels();
+  }
+
+  async getAllContexts(): Promise<ConversationContext[]> {
+    const db = this.dbService as any;
+    const contextRows = db.db
+      .prepare('SELECT * FROM contexts ORDER BY updated_at DESC')
+      .all();
+
+    const contexts: ConversationContext[] = [];
+    for (const row of contextRows) {
+      const context = this.dbService.loadContext(row.id);
+      if (context) {
+        contexts.push(context);
+      }
+    }
+    return contexts;
+  }
+
+  async getContext(contextId: string): Promise<ConversationContext | null> {
+    // Check active contexts first
+    const activeContext = this.activeContexts.get(contextId);
+    if (activeContext) {
+      return {
+        id: activeContext.id,
+        messages: activeContext.messages,
+        domain: activeContext.domain,
+        metadata: activeContext.metadata,
+        createdAt: activeContext.createdAt,
+        updatedAt: activeContext.updatedAt,
+      };
+    }
+
+    // Load from database
+    return this.dbService.loadContext(contextId);
+  }
+
+  async deleteContext(contextId: string): Promise<void> {
+    // Remove from active contexts
+    this.activeContexts.delete(contextId);
+
+    // Delete from database
+    const db = this.dbService as any;
+    const deleteMessages = db.db.prepare(
+      'DELETE FROM messages WHERE context_id = ?'
+    );
+    const deleteContext = db.db.prepare('DELETE FROM contexts WHERE id = ?');
+
+    deleteMessages.run(contextId);
+    deleteContext.run(contextId);
+  }
+
+  async createContext(domain?: string): Promise<ConversationContext> {
+    const contextId = uuidv4();
+    const now = new Date();
+
+    // Convert string domain to proper type or null
+    const validDomain:
+      | 'coding'
+      | 'general'
+      | 'mlb'
+      | 'cooking'
+      | 'fitness'
+      | null =
+      domain &&
+      ['coding', 'general', 'mlb', 'cooking', 'fitness'].includes(domain)
+        ? (domain as 'coding' | 'general' | 'mlb' | 'cooking' | 'fitness')
+        : null;
+
+    const context: ConversationContext = {
+      id: contextId,
+      messages: [],
+      domain: validDomain,
+      metadata: {},
+      createdAt: now,
+      updatedAt: now,
+    };
+
+    // Save to database immediately
+    this.dbService.saveContext(context);
+
     return context;
   }
 

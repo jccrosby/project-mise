@@ -1,0 +1,12 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+
+# Roadmap
+
+- The roadmap exists in /docs/roadmap/index.md
+- Refer to the roadmap when planning any updates, refactors, or new features
+- Update the roadmap on a regular basis
+- When updating the roadmap make sure to add an entry to the "updates"frontmatter

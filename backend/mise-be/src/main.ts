@@ -6,6 +6,7 @@ import { WebSocketServer } from 'ws';
 import { AIRouterService } from './services/AIRouterService';
 import { ChatRequest, ChatResponse } from './types';
 import { config } from './config';
+import { apiRoutes } from './routes';
 
 const app = express();
 const server = createServer(app);
@@ -23,6 +24,9 @@ app.use(express.json());
 app.get('/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
+
+// Mount API routes
+app.use('/api', apiRoutes);
 
 // WebSocket handling
 wss.on('connection', (ws) => {
