@@ -1,0 +1,59 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: pgvector/pgvector:pg17
+    container_name: mise-postgres
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-mise_dev}
+      POSTGRES_USER: ${POSTGRES_USER:-mise_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-mise_password}
+      POSTGRES_HOST_AUTH_METHOD: trust
+    ports:
+      - '${POSTGRES_PORT:-5432}:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/init:/docker-entrypoint-initdb.d
+      - ./database/backups:/backups
+    networks:
+      - mise_network
+    restart: unless-stopped
+    healthcheck:
+      test:
+        [
+          'CMD-SHELL',
+          'pg_isready -U ${POSTGRES_USER:-mise_user} -d ${POSTGRES_DB:-mise_dev}',
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: mise-pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL:-admin@mise.dev}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD:-admin}
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    ports:
+      - '${PGADMIN_PORT:-8080}:80'
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    networks:
+      - mise_network
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+    profiles:
+      - tools
+
+volumes:
+  postgres_data:
+    driver: local
+  pgadmin_data:
+    driver: local
+
+networks:
+  mise_network:
+    driver: bridge
