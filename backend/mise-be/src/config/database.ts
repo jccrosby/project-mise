@@ -14,7 +14,9 @@ interface TestDatabaseConfig extends DatabaseConfig {
   testDatabase: string;
 }
 
-const isDevelopment = process.env.NODE_ENV === 'development';
+const isDevelopment =
+  process.env.NODE_ENV === 'development' ||
+  process.env.NODE_ENV !== 'production';
 const isTest = process.env.NODE_ENV === 'test';
 
 export const config: DatabaseConfig = {
@@ -31,7 +33,10 @@ export const config: DatabaseConfig = {
     process.env.POSTGRES_CONNECTION_TIMEOUT || '5000',
     10
   ),
-  ssl: isDevelopment ? false : { rejectUnauthorized: false },
+  ssl:
+    process.env.NODE_ENV === 'production'
+      ? { rejectUnauthorized: false }
+      : false,
 };
 
 export const testConfig: TestDatabaseConfig = {

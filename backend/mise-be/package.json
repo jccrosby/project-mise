@@ -2,6 +2,12 @@
   "name": "@crosbyhq/mise-be",
   "version": "0.0.1",
   "private": true,
+  "scripts": {
+    "migrate": "node-pg-migrate -d $DATABASE_URL -m migrations",
+    "migrate:up": "node-pg-migrate -d $DATABASE_URL -m migrations up",
+    "migrate:down": "node-pg-migrate -d $DATABASE_URL -m migrations down",
+    "migrate:create": "node-pg-migrate -d $DATABASE_URL -m migrations create"
+  },
   "nx": {
     "targets": {
       "serve": {

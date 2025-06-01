@@ -1,9 +1,13 @@
 import { Router, Request, Response } from 'express';
 import { AIRouterService } from '../services/AIRouterService';
 import { ChatRequest, ChatResponse } from '../types';
+import vectorRoutes from './vectors';
 
 const router: Router = Router();
 const aiRouter = new AIRouterService();
+
+// Mount vector routes
+router.use('/vectors', vectorRoutes);
 
 // API Info endpoint
 router.get('/', (req, res) => {
@@ -18,6 +22,9 @@ router.get('/', (req, res) => {
       contexts: 'GET /api/contexts - List conversation contexts',
       context: 'GET /api/contexts/:id - Get specific context',
       deleteContext: 'DELETE /api/contexts/:id - Delete context',
+      vectors: 'POST /api/vectors - Create embedding',
+      vectorSearch: 'POST /api/vectors/search - Search similar embeddings',
+      vectorBatch: 'POST /api/vectors/batch - Batch create embeddings',
     },
   });
 });

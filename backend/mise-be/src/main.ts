@@ -7,6 +7,8 @@ import { AIRouterService } from './services/AIRouterService';
 import { ChatRequest, ChatResponse } from './types';
 import { config } from './config';
 import { apiRoutes } from './routes';
+import { database } from './services/database/connection';
+import { logger } from './services/logger';
 
 const app = express();
 const server = createServer(app);
@@ -14,6 +16,17 @@ const wss = new WebSocketServer({ server });
 
 // Initialize services
 const aiRouter = new AIRouterService();
+
+// Initialize database connection
+async function initializeDatabase() {
+  try {
+    await database.connect();
+    logger.info('Database connection initialized successfully');
+  } catch (error) {
+    logger.error('Failed to initialize database connection', error);
+    process.exit(1);
+  }
+}
 
 // Middleware
 app.use(helmet());
@@ -166,13 +179,31 @@ async function handleNonStreamingResponse(
 process.on('SIGINT', async () => {
   console.log('Shutting down gracefully...');
   await aiRouter.shutdown();
+  await database.disconnect();
   server.close(() => {
     console.log('Server closed');
     process.exit(0);
   });
 });
 
-server.listen(config.port, () => {
-  console.log(`AI Router server running on port ${config.port}`);
-  console.log(`WebSocket server running on port ${config.port}`);
-});
+// Start server with database initialization
+async function startServer() {
+  try {
+    // Initialize database first
+    await initializeDatabase();
+
+    // Start the server
+    server.listen(config.port, () => {
+      console.log(`AI Router server running on port ${config.port}`);
+      console.log(`WebSocket server running on port ${config.port}`);
+      console.log(
+        `Vector API available at http://localhost:${config.port}/api/vectors`
+      );
+    });
+  } catch (error) {
+    logger.error('Failed to start server', error);
+    process.exit(1);
+  }
+}
+
+startServer();

@@ -5,6 +5,14 @@ module.exports = {
   output: {
     path: join(__dirname, 'dist'),
   },
+  externals: {
+    'pg-native': 'commonjs pg-native',
+  },
+  resolve: {
+    fallback: {
+      'cloudflare:sockets': false,
+    },
+  },
   plugins: [
     new NxAppWebpackPlugin({
       target: 'node',

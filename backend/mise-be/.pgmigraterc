@@ -1,5 +1,5 @@
 {
-  "database-url-var": "POSTGRES_URL",
+  "database-url-var": "DATABASE_URL",
   "migrations-dir": "migrations",
   "dir": "migrations",
   "schema": "app",
