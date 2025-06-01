@@ -33,5 +33,15 @@
     "tags": [
       "backend"
     ]
+  },
+  "dependencies": {
+    "@types/pg": "^8.15.2",
+    "@types/pg-pool": "^2.0.6",
+    "node-pg-migrate": "^8.0.1",
+    "pg": "^8.16.0",
+    "pg-pool": "^3.10.0"
+  },
+  "devDependencies": {
+    "@types/node-pg-migrate": "^2.3.1"
   }
 }
