@@ -30,7 +30,7 @@ updates:
    - Full vector database schema with 1536-dimensional support
    - Complete REST API for vector operations (CRUD + similarity search)
    - Ready for RAG implementations
-4. [ ] Install Home Assistant on your older Windows laptop as a dedicated automation server
+4. [x] Install Home Assistant on your older Windows laptop as a dedicated automation server
 
 ### First Automation
 
